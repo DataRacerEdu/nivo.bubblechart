@@ -27,7 +27,7 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   output$widgetOutput <- renderBubblechart(
-    bubblechart(element_id = "test", data = json_data, main_color = "#ff5f56", label_color = "#ffffff", isInteractive = FALSE)
+    bubblechart(element_id = "test", data = json_data, main_color = "#ff5f56", label_color = "#ffffff", isInteractive = TRUE)
   )
 
   observeEvent(input$test_clicked, {

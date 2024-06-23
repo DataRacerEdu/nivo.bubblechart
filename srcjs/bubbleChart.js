@@ -65,21 +65,24 @@ function BubleChart(props) {
         if (targetNode) {
             // Send data to shiny
             if(targetNode.color === 'transparent') {
-              console.log('Target node:', "Deselect");
+              // console.log('Target node:', "Deselect");
               // Send data to Shiny with the edited data
-              Shiny.setInputValue(
-                `${props.element_id}_clicked`,
-                "DESELECT_EVENT",
-                {priority: "event"}
-              );
-
+              setTimeout(function() {
+                Shiny.setInputValue(
+                  `${props.element_id}_clicked`,
+                  "DESELECT_EVENT",
+                  {priority: "event"}
+                );
+              }, 1000);
             } else {
-              console.log('Target node:', targetNode.name);
-              Shiny.setInputValue(
-                `${props.element_id}_clicked`,
-                targetNode.name,
-                {priority: "event"}
-              );
+              // console.log('Target node:', targetNode.name);
+              setTimeout(function() {
+                Shiny.setInputValue(
+                  `${props.element_id}_clicked`,
+                  targetNode.name,
+                  {priority: "event"}
+                );
+              }, 1000);
             }
             targetNode.color = targetNode.color === 'transparent' ? props.mainColor : 'transparent';
             targetNode.labelColor = targetNode.labelColor === props.mainColor ? props.labelColor : props.mainColor;
