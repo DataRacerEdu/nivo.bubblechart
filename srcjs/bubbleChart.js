@@ -119,7 +119,7 @@ function BubleChart(props) {
           },
         }}
         onClick={handleClick}
-        isInteractive={true}
+        isInteractive={props.isInteractive}
         tooltip={({
           id,
           value,

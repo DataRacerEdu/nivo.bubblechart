@@ -11,14 +11,18 @@ bubblechart <- function(
     label_color,
     data = NULL,
     width = NULL,
-    height = '400px'
+    isInteractive = TRUE,
+    height = '400px',
+    activeColor = 'transparent'
   ) {
 
   configuration <- list(
-    element_id = element_id,
-    dataJSON   = data,
-    mainColor  = main_color,
-    labelColor = label_color
+    element_id    = element_id,
+    dataJSON      = data,
+    mainColor     = main_color,
+    labelColor    = label_color,
+    isInteractive = isInteractive,
+    activeColor   = activeColor
   )
 
   # describe a React component to send to the browser for rendering.

@@ -10,7 +10,9 @@ bubblechart(
   label_color,
   data = NULL,
   width = NULL,
-  height = "400px"
+  isInteractive = TRUE,
+  height = "400px",
+  activeColor = "transparent"
 )
 }
 \description{
