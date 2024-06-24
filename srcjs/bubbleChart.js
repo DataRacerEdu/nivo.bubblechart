@@ -108,7 +108,7 @@ function BubleChart(props) {
         }}
         padding={8}
         enableLabels={true}
-        labelsSkipRadius={10}
+        labelsSkipRadius={0}
         labelTextColor={(node) => {
           return node.data.labelColor;
         }}
