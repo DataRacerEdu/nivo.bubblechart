@@ -85,7 +85,6 @@ function BubleChart(props) {
               // }, 1000);
             }
             targetNode.color = targetNode.color === props.activeColor ? props.mainColor : props.activeColor;
-            targetNode.borderColor = targetNode.color === props.activeColor ? props.mainColor : props.activeColor;
             targetNode.labelColor = targetNode.labelColor === props.mainColor ? props.labelColor : props.mainColor;
             // console.log('Target node:', targetNode.name);
             setSelectedNode(targetNode); // Update selected node
@@ -113,7 +112,7 @@ function BubleChart(props) {
         labelTextColor={(node) => {
           return node.data.labelColor;
         }}
-        borderWidth={3}
+        borderWidth={props.borderWidth}
         borderColor={props.mainColor}
         theme={{
           labels: {

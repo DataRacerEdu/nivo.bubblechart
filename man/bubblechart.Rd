@@ -12,7 +12,8 @@ bubblechart(
   width = NULL,
   isInteractive = TRUE,
   height = "400px",
-  activeColor = "transparent"
+  activeColor = "transparent",
+  borderWidth = 3
 )
 }
 \description{
