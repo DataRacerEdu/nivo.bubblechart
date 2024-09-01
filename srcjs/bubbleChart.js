@@ -5,19 +5,19 @@ const initialData = {
   "name": "nivo",
   "children": [
     {
-      "name": "Innenpolitik",
+      "name": "Test A",
       "color": "#ff5f56",
       "labelColor": "#ffffff",
       "loc": 11
     },
     {
-      "name": "xAxis",
+      "name": "Test B",
       "color": "#ff5f56",
       "labelColor": "#ffffff",
       "loc": 56
     },
     {
-      "name": "Test",
+      "name": "Test C",
       "color": "#ff5f56",
       "labelColor": "#ffffff",
       "loc": 40
@@ -32,6 +32,7 @@ function BubleChart(props) {
       // const [data, setData] = useState(initialData);
       const [data, setData] = useState(props.dataJSON);
       const [selectedNode, setSelectedNode] = useState(null);
+      const [hoveredNode, setHoveredNode] = useState(null);
 
       console.log('Data:', props);
 
@@ -103,14 +104,21 @@ function BubleChart(props) {
         value="value"
         leavesOnly={true}
         // colors={{ scheme: 'nivo' }}
+        // colors={(node) => {
+        //   return node.data.color;
+        // }}
         colors={(node) => {
-          return node.data.color;
+          return hoveredNode === node.data.name ? 'transparent' : node.data.color;
         }}
         padding={8}
         enableLabels={true}
+        label={hoveredNode !== null ? 'formattedValue' : 'id'}
         labelsSkipRadius={0}
+        // labelTextColor={(node) => {
+        //   return node.data.labelColor;
+        // }}
         labelTextColor={(node) => {
-          return node.data.labelColor;
+          return hoveredNode === node.data.name ? props.on_hover_title_color : node.data.labelColor;
         }}
         borderWidth={props.borderWidth}
         borderColor={props.mainColor}
@@ -123,6 +131,12 @@ function BubleChart(props) {
         }}
         onClick={handleClick}
         isInteractive={props.isInteractive}
+                onMouseEnter={(node) => {
+          setHoveredNode(node.data.name);
+        }}
+        onMouseLeave={() => {
+          setHoveredNode(null);
+        }}
         tooltip={({
           id,
           value,

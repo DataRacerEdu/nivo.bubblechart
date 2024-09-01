@@ -8,6 +8,7 @@ bubblechart(
   element_id,
   main_color,
   label_color,
+  on_hover_title_color,
   data = NULL,
   width = NULL,
   isInteractive = TRUE,

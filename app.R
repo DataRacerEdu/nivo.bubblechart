@@ -1,38 +1,53 @@
 library(shiny)
 library(nivo.bubblechart)
-
-input_tibble <- tidyr::tibble(
-  topic = c("One", "Two", "Three"),
-  total_spend = c(269, 4705, 643)
-)
-inner_list <- purrr::map(input_tibble$topic, function(.x) {
-  list(
-    name = .x,
-    color = "#ff5f56",
-    labelColor = "#ffffff",
-    value = input_tibble[input_tibble$topic == .x, ]$total_spend
-  )
-})
+library(jsonlite)
 
 json_data <- list(
   name = "nivo",
-  children = inner_list
-) |> jsonlite::toJSON(na = 'null',pretty = TRUE, auto_unbox = TRUE)
+  children = list(
+    list(
+      name = "One",
+      color = "#ffa970",
+      labelColor = "#ffffff",
+      value = 269
+    ),
+    list(
+      name = "Two",
+      color = "#ffa970",
+      labelColor = "#ffffff",
+      value = 4705
+    ),
+    list(
+      name = "Three",
+      color = "#ffa970",
+      labelColor = "#ffffff",
+      value = 643
+    )
+  )
+) |> jsonlite::toJSON(na = 'null', pretty = TRUE, auto_unbox = TRUE)
 
 
 ui <- fluidPage(
-  titlePanel("reactR HTMLWidget Example"),
+  titlePanel("`nivo.bubblechart` example"),
   bubblechartOutput('widgetOutput')
 )
 
 server <- function(input, output, session) {
   output$widgetOutput <- renderBubblechart(
-    bubblechart(element_id = "test", data = json_data, main_color = "#ff5f56", label_color = "#ffffff", isInteractive = TRUE)
+    bubblechart(
+      element_id = "bubble_el",
+      data = json_data,
+      main_color = "#ffa970",
+      label_color = "#ffffff",
+      on_hover_title_color = "#ffa970",
+      isInteractive = TRUE
+    )
   )
 
-  observeEvent(input$test_clicked, {
-    print(input$test_clicked)
+  observeEvent(input$bubble_el_clicked, {
+    print(input$bubble_el_clicked)
   })
+
 }
 
 shinyApp(ui, server)

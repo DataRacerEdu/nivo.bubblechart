@@ -9,6 +9,7 @@ bubblechart <- function(
     element_id,
     main_color,
     label_color,
+    on_hover_title_color,
     data = NULL,
     width = NULL,
     isInteractive = TRUE,
@@ -24,7 +25,8 @@ bubblechart <- function(
     labelColor    = label_color,
     isInteractive = isInteractive,
     activeColor   = activeColor,
-    borderWidth   = borderWidth
+    borderWidth   = borderWidth,
+    on_hover_title_color = on_hover_title_color
   )
 
   # describe a React component to send to the browser for rendering.
