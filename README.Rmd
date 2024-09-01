@@ -1,10 +1,11 @@
 
 ---
-title: "`nivo.bubblechart` Package Documentation"
-output: html_document
+output: 
+  github_document:
+    df_print: "kable"
 ---
 
-## Introduction
+## `nivo.bubblechart` Package Documentation
 
 The `nivo.bubblechart` package is an R interface to the `nivo.rocks` library, specifically designed for creating interactive bubble charts. The `nivo.rocks` library is a powerful and flexible data visualization library built on top of React and D3. The `nivo.bubblechart` package allows R users to easily integrate these bubble charts into their Shiny applications.
 
