@@ -1,3 +1,11 @@
 .Rproj.user
 node_modules
 .Rproj.user/*
+.DS_Store
+.Rhistory
+.idea/
+.c*e/
+README.html
+docs/
+*.Rcheck/
+*.tar.gz

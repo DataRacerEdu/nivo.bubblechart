@@ -1,0 +1,123 @@
+url: https://dataraceredu.github.io/nivo.bubblechart/
+
+template:
+  bootstrap: 5
+  includes:
+    in_header: |
+      <style>
+      /* Logo sizing */
+      .navbar-brand img,
+      .navbar img {
+        max-height: 32px !important;
+        width: auto !important;
+      }
+      img.logo,
+      img.pkg-logo,
+      .page-header img,
+      #pkgdown-sidebar img,
+      .home img[src*="logo"] {
+        max-width: 20% !important;
+        width: 20% !important;
+        height: auto !important;
+      }
+      /* Override green hover - force red theme */
+      a:hover,
+      a:focus,
+      .nav-link:hover,
+      .nav-link:focus,
+      .navbar-nav .nav-link:hover,
+      .navbar-nav .nav-link:focus,
+      .dropdown-item:hover,
+      .dropdown-item:focus {
+        color: #C0392B !important;
+        text-decoration: none !important;
+      }
+      .navbar-light .navbar-nav .nav-link:hover,
+      .navbar-light .navbar-nav .nav-link:focus {
+        color: #F5B7B1 !important;
+      }
+      h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover,
+      .anchorjs-link:hover {
+        color: #C0392B !important;
+      }
+      .navbar-light .navbar-brand,
+      .navbar-light .navbar-nav .nav-link {
+        color: #2C3E50 !important;
+      }
+      .navbar-light .navbar-nav .nav-link:hover {
+        color: #E74C3C !important;
+      }
+      </style>
+  bslib:
+    primary: "#E74C3C"
+    secondary: "#C0392B"
+    success: "#E74C3C"
+    info: "#3498DB"
+    warning: "#F39C12"
+    danger: "#E74C3C"
+    bg: "#ffffff"
+    fg: "#2C3E50"
+    base_font: {google: "Open Sans"}
+    heading_font: {google: "Poppins"}
+    code_font: {google: "Fira Code"}
+    navbar-light-color: "#2C3E50"
+    navbar-light-hover-color: "#E74C3C"
+    navbar-light-active-color: "#E74C3C"
+    link-color: "#E74C3C"
+    link-hover-color: "#C0392B"
+    link-decoration: none
+
+home:
+  title: nivo.bubblechart
+  description: Interactive Bubble Charts for R and Shiny
+  sidebar:
+    structure: [links, license, community, authors, dev]
+
+navbar:
+  structure:
+    left: [intro, reference, articles, news]
+    right: [search, github]
+  components:
+    articles:
+      text: Articles
+      menu:
+      - text: Getting Started
+        href: articles/introduction.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/DataRacerEdu/nivo.bubblechart
+      aria-label: GitHub
+
+footer:
+  structure:
+    left: developed_by
+    right: built_with
+  components:
+    developed_by: |
+      Developed by [Anastasiia Kostiv](https://github.com/DataRacerEdu) | [DataRacerEdu](https://github.com/DataRacerEdu)
+
+authors:
+  DataRacerEdu:
+    href: https://github.com/DataRacerEdu
+
+reference:
+- title: Create Charts
+  desc: Functions to create bubble chart visualizations
+  contents:
+  - bubblechart
+  - prepare_bubble_data
+
+- title: Shiny Integration
+  desc: Functions for using bubble charts in Shiny applications
+  contents:
+  - bubblechartOutput
+  - renderBubblechart
+
+figures:
+  dev: ragg::agg_png
+  dpi: 96
+  dev.args: []
+  fig.ext: png
+  fig.width: 7
+  fig.height: 5
+  fig.retina: 2

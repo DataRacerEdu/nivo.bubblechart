@@ -2,5 +2,6 @@
 
 export(bubblechart)
 export(bubblechartOutput)
+export(prepare_bubble_data)
 export(renderBubblechart)
 import(htmlwidgets)
