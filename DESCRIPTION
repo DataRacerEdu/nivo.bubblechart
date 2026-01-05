@@ -1,16 +1,28 @@
 Package: nivo.bubblechart
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.1
-Authors@R: 
-    person("Anastasiia", "Kostiv", , "akostiv11@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Title: Interactive Bubble Charts for 'Shiny' Using 'Nivo'
+Version: 0.1.0
+Authors@R:
+    person("Anastasiia", "Kostiv", , "akostiv11@gmail.com", role = c("aut", "cre"))
+Description: Creates interactive bubble chart visualizations for 'Shiny' applications
+    using the 'Nivo' circle packing library. Provides an 'htmlwidgets' wrapper around
+    the 'Nivo' circle packing chart, enabling hierarchical data visualization with
+    customizable colors, labels, and interactive features including click and hover events.
+License: MIT + file LICENSE
+URL: https://github.com/DataRacerEdu/nivo.bubblechart
+BugReports: https://github.com/DataRacerEdu/nivo.bubblechart/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
-Imports: 
+RoxygenNote: 7.3.3
+Config/Needs/website: pkgdown
+Imports:
     htmltools,
     htmlwidgets,
+    jsonlite,
     reactR
+Suggests:
+    knitr,
+    rmarkdown,
+    shiny,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3

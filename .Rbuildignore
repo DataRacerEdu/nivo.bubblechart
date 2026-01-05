@@ -1,3 +1,5 @@
+^renv$
+^renv\.lock$
 ^nivo\.bubblechart\.Rproj$
 ^\.Rproj\.user$
 ^node_modules$
@@ -6,3 +8,16 @@
 ^package\.json$
 ^webpack\.config\.js$
 ^yarn\.lock$
+^\.idea$
+^dependencies\.R$
+^README\.Rmd$
+^README\.html$
+^\.git$
+^\.gitignore$
+^\.Rhistory$
+^\.DS_Store$
+^\.[a-z]+$
+^_pkgdown\.yml$
+^\.github$
+^\.c.*e$
+^docs$

@@ -1,160 +1,276 @@
 
-## `nivo.bubblechart` Package Documentation
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-The `nivo.bubblechart` package is an R interface to the `nivo.rocks`
-library, specifically designed for creating interactive bubble charts.
-The `nivo.rocks` library is a powerful and flexible data visualization
-library built on top of React and D3. The `nivo.bubblechart` package
-allows R users to easily integrate these bubble charts into their Shiny
-applications.
+# nivo.bubblechart <img src="man/figures/logo_transparent.png" align="right" height="139" />
 
-## Installation
+<!-- badges: start -->
 
-### Install the Development Version
+[![CRAN
+status](https://www.r-pkg.org/badges/version/nivo.bubblechart)](https://CRAN.R-project.org/package=nivo.bubblechart)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![R-CMD-check](https://github.com/DataRacerEdu/nivo.bubblechart/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DataRacerEdu/nivo.bubblechart/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/DataRacerEdu/nivo.bubblechart/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DataRacerEdu/nivo.bubblechart?branch=main)
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/nivo.bubblechart)](https://cran.r-project.org/package=nivo.bubblechart)
+<!-- badges: end -->
 
-Since the package is still under development, you can install the latest
-version directly from GitHub using the `remotes` package. This ensures
-that you have access to the most recent features and updates.
+> Interactive bubble charts for R and Shiny using
+> [Nivo](https://nivo.rocks)
+
+**nivo.bubblechart** brings circle packing visualizations from the Nivo
+library to R, making it easy to create interactive bubble charts for
+both static documents and Shiny applications.
+
+## Features
+
+-   **Clean defaults** - Professional visualizations with minimal
+    configuration
+-   **Interactive** - Built-in hover effects and click event handling
+-   **Data frame support** - Easy conversion using
+    `prepare_bubble_data()`
+-   **Shiny integration** - First-class support with event bindings
+-   **Customizable** - Control over colors, sizes, and interactions
+-   **Responsive** - Works across all screen sizes
+
+## 📦 Installation
+
+### CRAN
 
 ``` r
-# Install the remotes package if you haven't already
-install.packages("remotes")
-
-# Install the development version of nivo.bubblechart
-remotes::install_github('DataRacerEdu/nivo.bubblechart')
+install.packages("nivo.bubblechart")
 ```
 
-## Example Usage in a Shiny Application
+### Development Version
 
-Below is a full example of how to use the `nivo.bubblechart` package in
-a Shiny app.
+``` r
+# Using pak
+pak::pak("DataRacerEdu/nivo.bubblechart")
 
-### Load Required Libraries
+# Using remotes
+remotes::install_github("DataRacerEdu/nivo.bubblechart")
+
+# Using devtools
+devtools::install_github("DataRacerEdu/nivo.bubblechart")
+```
+
+## 🚀 Quick Start
+
+### Basic Example
+
+``` r
+library(nivo.bubblechart)
+
+# Prepare data
+sample_data <- list(
+  name = "root",
+  children = list(
+    list(name = "Apples",  value = 450, color = "#ff6b6b", labelColor = "#ffffff"),
+    list(name = "Bananas", value = 320, color = "#feca57", labelColor = "#000000"),
+    list(name = "Oranges", value = 280, color = "#ff9f43", labelColor = "#ffffff"),
+    list(name = "Grapes",  value = 150, color = "#a29bfe", labelColor = "#ffffff")
+  )
+)
+
+# Create visualization
+bubblechart(
+  element_id = "fruit_chart",
+  main_color = "#ff6b6b",
+  label_color = "#ffffff",
+  on_hover_title_color = "#2c3e50",
+  data = sample_data,
+  height = "500px"
+)
+```
+
+### Using Data Frames
+
+Most users work with data frames. Use `prepare_bubble_data()` to
+convert:
+
+``` r
+df <- data.frame(
+  product = c("Laptop", "Phone", "Tablet", "Watch"),
+  sales = c(45000, 38000, 22000, 15000),
+  category_color = c("#3498db", "#e74c3c", "#f39c12", "#9b59b6"),
+  text_color = rep("#ffffff", 4)
+)
+
+chart_data <- prepare_bubble_data(
+  df,
+  name_col = "product",
+  value_col = "sales",
+  color_col = "category_color",
+  label_color_col = "text_color"
+)
+
+bubblechart(
+  element_id = "sales_chart",
+  main_color = "#3498db",
+  label_color = "#ffffff",
+  on_hover_title_color = "#2c3e50",
+  data = chart_data,
+  height = "600px"
+)
+```
+
+## 📊 Shiny Integration
 
 ``` r
 library(shiny)
 library(nivo.bubblechart)
-library(jsonlite)
-```
 
-### Prepare the Data
-
-First, we need to prepare the data that will be visualized in the bubble
-chart. This is done using a nested list structure, which is then
-converted to JSON format.
-
-``` r
-json_data <- list(
-  name = "nivo",
-  children = list(
-    list(
-      name = "One",
-      color = "#ffa970",
-      labelColor = "#ffffff",
-      value = 269
-    ),
-    list(
-      name = "Two",
-      color = "#ffa970",
-      labelColor = "#ffffff",
-      value = 4705
-    ),
-    list(
-      name = "Three",
-      color = "#ffa970",
-      labelColor = "#ffffff",
-      value = 643
-    )
-  )
-) |> jsonlite::toJSON(na = 'null', pretty = TRUE, auto_unbox = TRUE)
-```
-
-### Define the User Interface (UI)
-
-The UI is defined using `fluidPage`, where the bubble chart output is
-placed using `bubblechartOutput`.
-
-``` r
 ui <- fluidPage(
-  titlePanel("`nivo.bubblechart` example"),
-  bubblechartOutput('widgetOutput')
+  titlePanel("Interactive Bubble Chart"),
+  sidebarLayout(
+    sidebarPanel(
+      h4("Click Statistics"),
+      verbatimTextOutput("click_info")
+    ),
+    mainPanel(
+      bubblechartOutput("chart", height = "600px")
+    )
+  )
 )
-```
 
-### Define the Server Logic
-
-The server logic is where the bubble chart is rendered using
-`renderBubblechart`. The chart is interactive, and any clicks on the
-bubbles can trigger events, which are handled using `observeEvent`.
-
-``` r
 server <- function(input, output, session) {
-  output$widgetOutput <- renderBubblechart(
-    bubblechart(
-      element_id = "bubble_el",
-      data = json_data,
-      main_color = "#ffa970",
-      label_color = "#ffffff",
-      on_hover_title_color = "#ffa970",
-      isInteractive = TRUE
+
+  chart_data <- list(
+    name = "Companies",
+    children = list(
+      list(name = "Tech", value = 2800, color = "#3498db", labelColor = "#ffffff"),
+      list(name = "Finance", value = 2100, color = "#2ecc71", labelColor = "#ffffff"),
+      list(name = "Retail", value = 1500, color = "#e74c3c", labelColor = "#ffffff")
     )
   )
 
-  observeEvent(input$bubble_el_clicked, {
-    print(input$bubble_el_clicked)
+  output$chart <- renderBubblechart({
+    bubblechart(
+      element_id = "company_viz",
+      main_color = "#3498db",
+      label_color = "#ffffff",
+      on_hover_title_color = "#f39c12",
+      data = chart_data,
+      height = "600px"
+    )
+  })
+
+  output$click_info <- renderPrint({
+    clicked <- input$company_viz_clicked
+    if (is.null(clicked)) {
+      cat("Click on a bubble to see details")
+    } else if (clicked == "DESELECT_EVENT") {
+      cat("Bubble deselected")
+    } else {
+      cat("Selected:", clicked)
+    }
   })
 }
-```
 
-### Launch the Shiny App
-
-Finally, the Shiny app is launched using `shinyApp`.
-
-``` r
 shinyApp(ui, server)
 ```
 
-### Example Output
+## 🎨 Customization
 
-Below is an example image of the Shiny app’s output. The chart displays
-three bubbles, each with different values, colors, and labels.
+``` r
+bubblechart(
+  element_id = "custom_chart",
+  main_color = "#2c3e50",           # Base color
+  label_color = "#ecf0f1",          # Label text color
+  activeColor = "#e74c3c",          # Selected bubble color
+  on_hover_title_color = "#f39c12", # Hover color
+  borderWidth = 5,                  # Border thickness
+  isInteractive = TRUE,             # Enable interactions
+  data = your_data,
+  height = "600px",
+  width = "100%"
+)
+```
 
-<img src="../../../../Library/R/arm64/4.2/library/nivo.bubblechart/images/image1.png" width="100%" />
+## 📸 Screenshots
 
-<img src="../../../../Library/R/arm64/4.2/library/nivo.bubblechart/images/image2.png" width="100%" />
+<p align="center">
+<img src="man/figures/image1.png" alt="Bubble Chart Example 1" width="45%"/>
+<img src="man/figures/image2.png" alt="Bubble Chart Example 2" width="45%"/>
+</p>
 
-## Explanation of Key Functions and Parameters
+## Use Cases
 
-### `bubblechartOutput(outputId)`
+**Portfolio Analysis** - Visualize asset allocation with bubble size
+representing investment amounts and colors indicating risk levels.
 
-This function is used in the UI to create a placeholder for the bubble
-chart. The `outputId` should match the ID used in the
-`renderBubblechart` function in the server logic.
+**Web Analytics** - Display page performance metrics with bubble size
+for traffic and colors for conversion rates.
 
-### `renderBubblechart(expr)`
+**Survey Results** - Show categorical responses with bubble sizes
+representing vote counts.
 
-This function is used in the server logic to render the bubble chart.
-The `expr` is an expression that generates the bubble chart using the
-`bubblechart` function.
+**Market Analysis** - Represent market share distribution with
+customizable colors for different sectors.
 
-### `bubblechart(...)`
+## 📚 Documentation
 
-The `bubblechart` function is the main function that creates the bubble
-chart object. It takes several parameters, including:
+-   **Vignette**:
+    `vignette("introduction", package = "nivo.bubblechart")`
+-   **Function Reference**: `?bubblechart` and `?prepare_bubble_data`
+-   **GitHub**: [Issues and
+    discussions](https://github.com/DataRacerEdu/nivo.bubblechart/issues)
 
-- `element_id`: The ID of the HTML element where the chart will be
-  rendered.
-- `data`: The data for the chart in JSON format.
-- `main_color`: The main color of the bubbles.
-- `label_color`: The color of the labels on the bubbles.
-- `on_hover_title_color`: The color of the title when a bubble is
-  hovered.
-- `isInteractive`: A boolean indicating whether the chart is
-  interactive.
+## Key Functions
 
-### Interactivity and Event Handling
+| Function                | Description                         |
+|-------------------------|-------------------------------------|
+| `bubblechart()`         | Create an interactive bubble chart  |
+| `prepare_bubble_data()` | Convert data frames to chart format |
+| `bubblechartOutput()`   | Shiny output function               |
+| `renderBubblechart()`   | Shiny render function               |
 
-The `observeEvent` function is used to listen for events such as clicks
-on the bubbles. The event is captured using the input ID followed by
-`_clicked`. In this example, `input$bubble_el_clicked` captures the
-click event on any bubble in the chart.
+## 🤝 Contributing
+
+Contributions welcome. Please open an issue first for major changes.
+
+``` r
+# Clone the repository
+git clone https://github.com/DataRacerEdu/nivo.bubblechart.git
+
+# Install dependencies
+pak::pak(".")
+
+# Run tests
+devtools::test()
+
+# Check package
+devtools::check()
+```
+
+## License
+
+MIT License.
+
+## Acknowledgments
+
+-   [Nivo](https://nivo.rocks) visualization library
+-   [htmlwidgets](https://www.htmlwidgets.org/) for R integration
+-   [React](https://reactjs.org/) and [D3](https://d3js.org/)
+
+## 📞 Getting Help
+
+-   **Vignette**:
+    `vignette("introduction", package = "nivo.bubblechart")`
+-   [Report
+    Issues](https://github.com/DataRacerEdu/nivo.bubblechart/issues)
+-   Email: <dataraceredu@gmail.com>
+
+------------------------------------------------------------------------
+
+<div align="center">
+
+**Made by [Anastasiia Kostiv](https://github.com/DataRacerEdu) \|
+[DataRacerEdu](https://github.com/DataRacerEdu)**
+
+[![Follow on
+GitHub](https://img.shields.io/github/followers/DataRacerEdu?label=Follow&style=social)](https://github.com/DataRacerEdu)
+
+</div>
