@@ -36,3 +36,9 @@ renderBubblechart(expr, env = parent.frame(), quoted = FALSE)
   Is `expr` a quoted expression (with
   [`quote()`](https://rdrr.io/r/base/substitute.html))? This is useful
   if you want to save an expression in a variable.
+
+## Value
+
+For `bubblechartOutput`, a Shiny UI element that can be included in a
+Shiny UI definition. For `renderBubblechart`, a Shiny render function
+that can be assigned to an output slot in a Shiny server function.

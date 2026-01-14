@@ -143,7 +143,7 @@ for Shiny integration.
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
+if (interactive()) {
 library(nivo.bubblechart)
 
 # Example 1: Basic bubble chart with manual data
@@ -201,5 +201,5 @@ bubblechart(
   data = sample_data,
   isInteractive = TRUE
 )
-} # }
+}
 ```

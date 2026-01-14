@@ -196,7 +196,7 @@ data_df$labelColor <- "#ffffff"
 bubble_data <- prepare_bubble_data(data_df, name_col = "item", value_col = "size")
 
 # Example 5: Use with bubblechart
-if (FALSE) { # \dontrun{
+if (interactive()) {
 library(nivo.bubblechart)
 
 df <- data.frame(
@@ -220,5 +220,5 @@ bubblechart(
   data = chart_data,
   height = "500px"
 )
-} # }
+}
 ```
