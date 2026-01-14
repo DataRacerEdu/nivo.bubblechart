@@ -91,7 +91,7 @@ When used in Shiny, the chart generates click events that can be captured via
 Clicking a bubble returns its name, and clicking it again returns \code{"DESELECT_EVENT"}.
 }
 \examples{
-\dontrun{
+if (interactive()) {
 library(nivo.bubblechart)
 
 # Example 1: Basic bubble chart with manual data

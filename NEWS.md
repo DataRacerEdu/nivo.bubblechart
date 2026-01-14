@@ -1,3 +1,11 @@
+# nivo.bubblechart 0.1.1
+
+## CRAN Review Fixes
+
+* Added reference to Nivo library in DESCRIPTION
+* Added `\value` documentation for Shiny binding functions
+* Replaced `\dontrun{}` with `if(interactive()){}` in examples
+
 # nivo.bubblechart 0.1.0
 
 ## Initial Release

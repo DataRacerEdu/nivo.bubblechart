@@ -67,7 +67,7 @@
 #' \code{\link{bubblechartOutput}} and \code{\link{renderBubblechart}} for Shiny integration.
 #'
 #' @examples
-#' \dontrun{
+#' if (interactive()) {
 #' library(nivo.bubblechart)
 #'
 #' # Example 1: Basic bubble chart with manual data
@@ -194,6 +194,10 @@ widget_html.bubblechart <- function(id, style, class, ...) {
 #' @param env The environment in which to evaluate \code{expr}.
 #' @param quoted Is \code{expr} a quoted expression (with \code{quote()})? This
 #'   is useful if you want to save an expression in a variable.
+#'
+#' @return For \code{bubblechartOutput}, a Shiny UI element that can be included
+#'   in a Shiny UI definition. For \code{renderBubblechart}, a Shiny render
+#'   function that can be assigned to an output slot in a Shiny server function.
 #'
 #' @name bubblechart-shiny
 #'
@@ -328,7 +332,7 @@ renderBubblechart <- function(expr, env = parent.frame(), quoted = FALSE) {
 #' bubble_data <- prepare_bubble_data(data_df, name_col = "item", value_col = "size")
 #'
 #' # Example 5: Use with bubblechart
-#' \dontrun{
+#' if (interactive()) {
 #' library(nivo.bubblechart)
 #'
 #' df <- data.frame(
