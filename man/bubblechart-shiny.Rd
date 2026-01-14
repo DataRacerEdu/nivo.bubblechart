@@ -24,6 +24,11 @@ string and have \code{'px'} appended.}
 \item{quoted}{Is \code{expr} a quoted expression (with \code{quote()})? This
 is useful if you want to save an expression in a variable.}
 }
+\value{
+For \code{bubblechartOutput}, a Shiny UI element that can be included
+in a Shiny UI definition. For \code{renderBubblechart}, a Shiny render
+function that can be assigned to an output slot in a Shiny server function.
+}
 \description{
 Output and render functions for using bubblechart within Shiny
 applications and interactive Rmd documents.
